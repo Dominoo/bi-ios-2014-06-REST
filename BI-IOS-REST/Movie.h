@@ -10,11 +10,14 @@
 
 @interface Movie : NSObject
 
+@property (nonatomic,strong)  NSNumber* movieID;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSDate *releaseDate;
 @property (nonatomic, strong) NSString *imdbURL;
 
 - (instancetype)initWithJSONObject:(id)object;
 - (id)JSONObject;
+
++ (NSDateFormatter*) movieDateFormatter;
 
 @end

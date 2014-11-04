@@ -64,6 +64,7 @@
          callbacky budou bezet na pozadi ve fronte
          */
         [_imageManager setCompletionQueue:[self backgroundCompletionQueue]];
+    self.responseSerializer = [AFJSONResponseSerializer new];
     }
     return self;
 }
@@ -76,94 +77,16 @@
     return [super GET:URLString
            parameters:parameters
               success:^(NSURLSessionDataTask *task, id responseObject){
-                  TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
+                  TRC_LOG(@"%ld, %@ %@", (long)((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
+                  
                   success(task, responseObject);
+                  
+                  
               } failure:^(NSURLSessionDataTask *task, NSError *error){
-                  TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
+                  TRC_LOG(@"%ld, %@ %@", (long)((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
                   failure(task, error);
               }];
 }
 
-- (NSURLSessionDataTask *)PUT:(NSString *)URLString
-                   parameters:(NSDictionary *)parameters
-                      success:(void (^)(NSURLSessionDataTask *, id))success
-                      failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
-{
-    return [super PUT:URLString
-           parameters:parameters
-              success:^(NSURLSessionDataTask *task, id responseObject){
-                  TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                  success(task, responseObject);
-              } failure:^(NSURLSessionDataTask *task, NSError *error){
-                  TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                  failure(task, error);
-              }];
-}
-
-- (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
-                       success:(void (^)(NSURLSessionDataTask *, id))success
-                       failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
-{
-    return [super POST:URLString
-            parameters:parameters
-               success:^(NSURLSessionDataTask *task, id responseObject){
-                   TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                   success(task, responseObject);
-               } failure:^(NSURLSessionDataTask *task, NSError *error){
-                   TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                   failure(task, error);
-               }];
-}
-
-- (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
-     constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
-                       success:(void (^)(NSURLSessionDataTask *, id))success
-                       failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
-{
-    return [super    POST:URLString parameters:parameters
-constructingBodyWithBlock:block
-                  success:^(NSURLSessionDataTask *task, id responseObject){
-                      TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                      success(task, responseObject);
-                  }  failure:^(NSURLSessionDataTask *task, NSError *error){
-                      TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-                      failure(task, error);
-                  }];
-}
-- (void)getImageAtPath:(NSString *)path
-            parameters:(NSDictionary *)parameters
-               process:(UIImage *(^)(UIImage *))process
-               success:(void (^)(NSHTTPURLResponse *, id))success
-               failure:(void (^)(NSError *))failure
-{
-    NSParameterAssert(path);
-    NSParameterAssert(success);
-    NSParameterAssert(failure);
-    
-    NSMutableURLRequest *request = [_imageManager.requestSerializer requestWithMethod:@"GET"
-                                                                   URLString:path
-                                                                  parameters:parameters];
-    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    __block NSURLSessionDataTask *task = [_imageManager dataTaskWithRequest:request
-      completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
-          
-          TRC_LOG(@"%d, %@ %@", ((NSHTTPURLResponse *)task.response).statusCode, task.originalRequest.HTTPMethod, task.originalRequest.URL)
-          
-          if (error) {
-              failure(error);
-          } else {
-              NSAssert(![NSThread currentThread].isMainThread, @"this must be executed on background thread");
-              UIImage *image = process(responseObject);
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  NSAssert([NSThread currentThread].isMainThread, @"this must be executed on main thread");
-                  success((NSHTTPURLResponse *)task.response, image);
-              });
-          }
-      }];
-    
-    [task resume];
-}
 
 @end

@@ -10,7 +10,7 @@
 
 @interface APIWrapper : NSObject
 
-+ (void)feedsSuccess:(void (^)(NSArray *feeds))success failure:(void (^)())failure;
++ (void)moviesSuccess:(void (^)(NSArray *movies))success failure:(void (^)())failure;
 
 
 @end

@@ -12,10 +12,5 @@
 
 + (instancetype)sharedManager;
 
-- (void)getImageAtPath:(NSString *)path
-            parameters:(NSDictionary *)parameters
-               process:(UIImage *(^)(UIImage *))process
-               success:(void (^)(NSHTTPURLResponse *, id))success
-               failure:(void (^)(NSError *))failure;
 
 @end
