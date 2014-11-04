@@ -17,6 +17,7 @@
 		B417DA721A083DEB002EC8E3 /* HTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B417DA711A083DEB002EC8E3 /* HTTPManager.m */; };
 		B417DA751A083E02002EC8E3 /* APIWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B417DA741A083E02002EC8E3 /* APIWrapper.m */; };
 		B417DA781A083F00002EC8E3 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = B417DA771A083F00002EC8E3 /* Movie.m */; };
+		B417DA7C1A08BE65002EC8E3 /* MovieCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B417DA7B1A08BE65002EC8E3 /* MovieCellTableViewCell.m */; };
 		C787F0C7985CBB56F88011A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8E48F20E595ACCEE23EBBF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		B417DA761A083F00002EC8E3 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		B417DA771A083F00002EC8E3 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		B417DA791A08BD0C002EC8E3 /* PrefixHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.h; path = "BI-IOS-REST/PrefixHeader.h"; sourceTree = "<group>"; };
+		B417DA7A1A08BE65002EC8E3 /* MovieCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCellTableViewCell.h; sourceTree = "<group>"; };
+		B417DA7B1A08BE65002EC8E3 /* MovieCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCellTableViewCell.m; sourceTree = "<group>"; };
 		CD8E48F20E595ACCEE23EBBF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -122,6 +125,8 @@
 				B417DA741A083E02002EC8E3 /* APIWrapper.m */,
 				B417DA761A083F00002EC8E3 /* Movie.h */,
 				B417DA771A083F00002EC8E3 /* Movie.m */,
+				B417DA7A1A08BE65002EC8E3 /* MovieCellTableViewCell.h */,
+				B417DA7B1A08BE65002EC8E3 /* MovieCellTableViewCell.m */,
 			);
 			path = "BI-IOS-REST";
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			files = (
 				B417DA781A083F00002EC8E3 /* Movie.m in Sources */,
 				B417DA531A083BB8002EC8E3 /* ViewController.m in Sources */,
+				B417DA7C1A08BE65002EC8E3 /* MovieCellTableViewCell.m in Sources */,
 				B417DA501A083BB8002EC8E3 /* AppDelegate.m in Sources */,
 				B417DA4D1A083BB8002EC8E3 /* main.m in Sources */,
 				B417DA721A083DEB002EC8E3 /* HTTPManager.m in Sources */,
